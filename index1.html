@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Connect - Professional Job Portal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#0f172a,#1e293b,#111827);
+    color:white;
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+/* NAVBAR */
+
+nav{
+    width:100%;
+    padding:20px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(255,255,255,0.1);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo{
+    font-size:32px;
+    font-weight:700;
+    color:#60a5fa;
+}
+
+.nav-text{
+    color:#cbd5e1;
+}
+
+/* HOME PAGE */
+
+#homePage{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    min-height:90vh;
+    padding:30px;
+}
+
+.hero{
+    text-align:center;
+    margin-bottom:60px;
+}
+
+.hero h1{
+    font-size:60px;
+    margin-bottom:20px;
+    background:linear-gradient(to right,#60a5fa,#38bdf8,#818cf8);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+    color:#cbd5e1;
+    font-size:20px;
+}
+
+.option-container{
+    display:flex;
+    gap:40px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.option-card{
+    width:340px;
+    height:240px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:25px;
+    padding:30px;
+    cursor:pointer;
+    transition:0.4s;
+    position:relative;
+    overflow:hidden;
+}
+
+.option-card::before{
+    content:'';
+    position:absolute;
+    width:200%;
+    height:200%;
+    background:linear-gradient(45deg,transparent,#60a5fa33,transparent);
+    top:-50%;
+    left:-50%;
+    transform:rotate(25deg);
+}
+
+.option-card:hover{
+    transform:translateY(-10px) scale(1.03);
+    border-color:#60a5fa;
+    box-shadow:0 20px 40px rgba(96,165,250,0.3);
+}
+
+.option-card h2{
+    font-size:32px;
+    margin-bottom:20px;
+    color:#60a5fa;
+}
+
+.option-card p{
+    color:#d1d5db;
+    line-height:1.7;
+}
+
+/* PAGES */
+
+.page{
+    display:none;
+    padding:50px 8%;
+}
+
+.back-btn{
+    background:#2563eb;
+    border:none;
+    color:white;
+    padding:12px 22px;
+    border-radius:12px;
+    cursor:pointer;
+    margin-bottom:30px;
+    font-size:16px;
+    transition:0.3s;
+}
+
+.back-btn:hover{
+    background:#3b82f6;
+}
+
+/* FORM */
+
+.form-container{
+    max-width:900px;
+    margin:auto;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(18px);
+    border-radius:30px;
+    padding:40px;
+    border:1px solid rgba(255,255,255,0.1);
+    box-shadow:0 20px 50px rgba(0,0,0,0.4);
+}
+
+.form-container h2{
+    text-align:center;
+    margin-bottom:35px;
+    color:#60a5fa;
+    font-size:40px;
+}
+
+.input-group{
+    margin-bottom:20px;
+}
+
+.input-group label{
+    display:block;
+    margin-bottom:8px;
+    color:#e2e8f0;
+}
+
+input, textarea{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:15px;
+    background:rgba(255,255,255,0.1);
+    color:white;
+    outline:none;
+    font-size:15px;
+}
+
+textarea{
+    resize:none;
+}
+
+input::placeholder,
+textarea::placeholder{
+    color:#cbd5e1;
+}
+
+.submit-btn{
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:15px;
+    background:linear-gradient(to right,#2563eb,#60a5fa);
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    transition:0.3s;
+    font-weight:600;
+}
+
+.submit-btn:hover{
+    transform:scale(1.02);
+    box-shadow:0 10px 25px rgba(96,165,250,0.4);
+}
+
+/* EMPLOYEE PAGE */
+
+.employee-title{
+    text-align:center;
+    font-size:45px;
+    margin-bottom:40px;
+    color:#60a5fa;
+}
+
+.candidate-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+}
+
+.candidate-card{
+    background:rgba(255,255,255,0.08);
+    border-radius:25px;
+    padding:25px;
+    cursor:pointer;
+    transition:0.4s;
+    border:1px solid rgba(255,255,255,0.08);
+}
+
+.candidate-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 15px 35px rgba(0,0,0,0.4);
+    border-color:#60a5fa;
+}
+
+.candidate-card h3{
+    color:#60a5fa;
+    margin-bottom:15px;
+    font-size:28px;
+}
+
+.candidate-card p{
+    margin-bottom:10px;
+    color:#d1d5db;
+}
+
+/* DETAILS */
+
+#candidateDetails{
+    margin-top:50px;
+}
+
+.details-box{
+    background:rgba(255,255,255,0.08);
+    border-radius:30px;
+    padding:40px;
+    border:1px solid rgba(255,255,255,0.1);
+    box-shadow:0 20px 50px rgba(0,0,0,0.4);
+}
+
+.details-box h2{
+    color:#60a5fa;
+    margin-bottom:25px;
+    font-size:40px;
+}
+
+.details-box p{
+    margin-bottom:15px;
+    line-height:1.8;
+    color:#e5e7eb;
+}
+
+.select-btn{
+    margin-top:25px;
+    padding:14px 30px;
+    border:none;
+    border-radius:15px;
+    background:linear-gradient(to right,#10b981,#34d399);
+    color:white;
+    cursor:pointer;
+    font-size:17px;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.select-btn:hover{
+    transform:scale(1.05);
+}
+
+/* POPUP */
+
+.popup-overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.7);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+.popup-box{
+    width:400px;
+    background:#0f172a;
+    padding:40px;
+    border-radius:25px;
+    text-align:center;
+    border:1px solid rgba(255,255,255,0.1);
+    box-shadow:0 20px 40px rgba(0,0,0,0.5);
+}
+
+.popup-box h2{
+    color:#60a5fa;
+    margin-bottom:15px;
+}
+
+.popup-box p{
+    color:#d1d5db;
+    margin-bottom:20px;
+}
+
+.popup-box button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(to right,#2563eb,#60a5fa);
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.hero h1{
+    font-size:40px;
+}
+
+.option-card{
+    width:100%;
+}
+
+.form-container{
+    padding:25px;
+}
+
+.employee-title{
+    font-size:35px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+    <div class="logo">Connect</div>
+    <div class="nav-text">Professional Hiring Platform</div>
+</nav>
+
+<!-- HOME PAGE -->
+
+<section id="homePage">
+
+    <div class="hero">
+        <h1>Find Your Dream Career</h1>
+        <p>
+            Connect talented professionals with the best companies around the world.
+        </p>
+    </div>
+
+    <div class="option-container">
+
+        <div class="option-card" onclick="showPage('jobPage')">
+            <h2>Find Job</h2>
+            <p>
+                Create your professional profile, showcase your skills,
+                upload certificates and get discovered by top companies.
+            </p>
+        </div>
+
+        <div class="option-card" onclick="openCompanyPopup()">
+            <h2>Find Employee</h2>
+            <p>
+                Browse skilled candidates, explore detailed profiles and
+                hire the perfect employee for your company.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- COMPANY POPUP -->
+
+<div id="companyPopup" class="popup-overlay">
+
+    <div class="popup-box">
+
+        <h2>Company Verification</h2>
+
+        <p>Please enter your company name to continue.</p>
+
+        <input type="text"
+        id="companyName"
+        placeholder="Enter Company Name">
+
+        <button onclick="enterEmployeePage()">
+            Continue
+        </button>
+
+    </div>
+
+</div>
+
+<!-- FIND JOB PAGE -->
+
+<section id="jobPage" class="page">
+
+    <button class="back-btn" onclick="goHome()">⬅ Back</button>
+
+    <div class="form-container">
+
+        <h2>Create Your Profile</h2>
+
+        <form id="jobForm">
+
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" id="name" placeholder="Enter your name" required>
+            </div>
+
+            <div class="input-group">
+                <label>Age</label>
+                <input type="number" id="age" placeholder="Enter your age" required>
+            </div>
+
+            <div class="input-group">
+                <label>Phone Number</label>
+                <input type="text" id="phone" placeholder="Enter phone number" required>
+            </div>
+
+            <div class="input-group">
+                <label>Years of Experience</label>
+                <input type="number" id="experience" placeholder="Experience in years" required>
+            </div>
+
+            <div class="input-group">
+                <label>Skills</label>
+                <input type="text" id="skills" placeholder="HTML, CSS, Java, Python..." required>
+            </div>
+
+            <div class="input-group">
+                <label>Education</label>
+                <input type="text" id="education" placeholder="Your education qualification" required>
+            </div>
+
+            <div class="input-group">
+                <label>About You</label>
+                <textarea id="about" rows="4" placeholder="Tell about yourself"></textarea>
+            </div>
+
+            <div class="input-group">
+                <label>What Are You Good At?</label>
+                <textarea id="goodAt" rows="4" placeholder="Your strengths"></textarea>
+            </div>
+
+            <div class="input-group">
+                <label>Upload Certificates / Resume</label>
+                <input type="file" id="certificate">
+            </div>
+
+            <button type="submit" class="submit-btn">
+                Submit Profile
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+<!-- FIND EMPLOYEE PAGE -->
+
+<section id="employeePage" class="page">
+
+    <button class="back-btn" onclick="goHome()">⬅ Back</button>
+
+    <h1 class="employee-title">Available Candidates</h1>
+
+    <div id="candidateList" class="candidate-grid"></div>
+
+    <div id="candidateDetails"></div>
+
+</section>
+
+<script>
+
+/* STORAGE */
+
+let candidates = JSON.parse(localStorage.getItem("connectCandidates")) || [];
+
+/* SHOW PAGE */
+
+function showPage(pageId){
+
+    document.getElementById("homePage").style.display = "none";
+    document.getElementById("jobPage").style.display = "none";
+    document.getElementById("employeePage").style.display = "none";
+
+    document.getElementById(pageId).style.display = "block";
+
+    if(pageId === "employeePage"){
+        displayCandidates();
+    }
+}
+
+/* HOME */
+
+function goHome(){
+
+    document.getElementById("homePage").style.display = "flex";
+    document.getElementById("jobPage").style.display = "none";
+    document.getElementById("employeePage").style.display = "none";
+}
+
+/* COMPANY POPUP */
+
+function openCompanyPopup(){
+
+    document.getElementById(
+        "companyPopup"
+    ).style.display = "flex";
+}
+
+/* ENTER EMPLOYEE PAGE */
+
+function enterEmployeePage(){
+
+    const company =
+    document.getElementById("companyName").value;
+
+    if(company.trim() === ""){
+
+        alert("Please enter company name");
+
+        return;
+    }
+
+    localStorage.setItem(
+        "currentCompany",
+        company
+    );
+
+    document.getElementById(
+        "companyPopup"
+    ).style.display = "none";
+
+    showPage("employeePage");
+}
+
+/* FORM SUBMIT */
+
+document.getElementById("jobForm").addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    const certificateFile =
+    document.getElementById("certificate").files[0];
+
+    const candidate = {
+
+        name: document.getElementById("name").value,
+        age: document.getElementById("age").value,
+        phone: document.getElementById("phone").value,
+        experience: document.getElementById("experience").value,
+        skills: document.getElementById("skills").value,
+        education: document.getElementById("education").value,
+        about: document.getElementById("about").value,
+        goodAt: document.getElementById("goodAt").value,
+        certificate: certificateFile ? certificateFile.name : "No File Uploaded",
+        selected:false,
+        selectedBy:""
+    };
+
+    candidates.push(candidate);
+
+    localStorage.setItem(
+        "connectCandidates",
+        JSON.stringify(candidates)
+    );
+
+    alert("Profile Submitted Successfully!");
+
+    document.getElementById("jobForm").reset();
+
+    goHome();
+});
+
+/* DISPLAY CANDIDATES */
+
+function displayCandidates(){
+
+    const list = document.getElementById("candidateList");
+
+    list.innerHTML = "";
+
+    if(candidates.length === 0){
+
+        list.innerHTML = `
+            <p style="color:white;font-size:20px;">
+                No candidates available yet.
+            </p>
+        `;
+
+        return;
+    }
+
+    candidates.forEach((candidate,index)=>{
+
+        const card = document.createElement("div");
+
+        card.className = "candidate-card";
+
+        card.innerHTML = `
+            <h3>${candidate.name}</h3>
+
+            <p><strong>Skills:</strong>
+            ${candidate.skills}</p>
+
+            <p><strong>Experience:</strong>
+            ${candidate.experience} years</p>
+
+            <p><strong>Education:</strong>
+            ${candidate.education}</p>
+        `;
+
+        card.onclick = () => showCandidate(index);
+
+        list.appendChild(card);
+    });
+}
+
+/* SHOW DETAILS */
+
+function showCandidate(index){
+
+    const candidate = candidates[index];
+
+    const details = document.getElementById("candidateDetails");
+
+    details.innerHTML = `
+
+        <div class="details-box">
+
+            <h2>${candidate.name}</h2>
+
+            <p><strong>Age:</strong>
+            ${candidate.age}</p>
+
+            <p><strong>Phone:</strong>
+            ${candidate.phone}</p>
+
+            <p><strong>Experience:</strong>
+            ${candidate.experience} years</p>
+
+            <p><strong>Skills:</strong>
+            ${candidate.skills}</p>
+
+            <p><strong>Education:</strong>
+            ${candidate.education}</p>
+
+            <p><strong>About:</strong>
+            ${candidate.about}</p>
+
+            <p><strong>Strengths:</strong>
+            ${candidate.goodAt}</p>
+
+            <p><strong>Certificates:</strong>
+            ${candidate.certificate}</p>
+
+            ${
+                candidate.selected
+                ?
+
+                `<p style="margin-top:20px;
+                color:#4ade80;
+                font-size:18px;
+                font-weight:bold;">
+
+                ✅ Selected by
+                ${candidate.selectedBy}
+
+                </p>`
+
+                :
+
+                `<button
+                class="select-btn"
+                onclick="selectCandidate(${index})">
+
+                Select Candidate
+
+                </button>`
+            }
+
+        </div>
+    `;
+}
+
+/* SELECT CANDIDATE */
+
+function selectCandidate(index){
+
+    const company =
+    localStorage.getItem("currentCompany");
+
+    candidates[index].selected = true;
+
+    candidates[index].selectedBy = company;
+
+    localStorage.setItem(
+        "connectCandidates",
+        JSON.stringify(candidates)
+    );
+
+    showCandidate(index);
+
+    alert(
+        candidates[index].name +
+        " has been selected by " +
+        company
+    );
+}
+
+</script>
+
+</body>
+</html>
